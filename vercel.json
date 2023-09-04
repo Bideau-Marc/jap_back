@@ -1,37 +1,111 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "dist/main.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/user",
-        "dest": "dist/user/user.controller.js",
-        "methods": ["GET", "POST","DELETE","PUT"]
-      },
-      {
-        "src": "/caractere",
-        "dest": "dist/caractere/caractere.controller.js",
-        "methods": ["GET", "POST","DELETE","PUT"]
-      },
-      {
-        "src": "/controle",
-        "dest": "dist/controle/controle.controller.js",
-        "methods": ["GET", "POST","DELETE","PUT"]
-      },
-      {
-        "src": "/theme",
-        "dest": "dist/theme/theme.controller.js",
-        "methods": ["GET", "POST","DELETE","PUT"]
-      },
-      {
-        "src": "/",
-        "dest": "dist/main.js",
-        "methods": ["GET", "POST", "PUT", "DELETE"]  
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    { 
+      "src": "/user",
+      "dest": "src/user/user.controller.ts",
+      "methods": ["GET", "POST", "DELETE", "PUT"]
+    },
+    {
+      "src": "/user/:id",
+      "dest": "src/user/user.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/caractere",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET", "POST", "DELETE", "PUT"]
+    },
+    {
+      "src": "/caractere/:id",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/caractere/multiple",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/caractere/the/:id",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/caractere/id/:id",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/caractere/fr/:id",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/caractere/kat/:id",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/caractere/hir/:id",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/caractere/Kanji/:id",
+      "dest": "src/caractere/caractere.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/controle",
+      "dest": "src/controle/controle.controller.ts",
+      "methods": ["GET", "POST", "DELETE", "PUT"]
+    },
+    {
+      "src": "/controle/:id",
+      "dest": "src/controle/controle.controller.ts",
+      "methods": ["GET", "PUT", "DELETE"]
+    },
+    {
+      "src": "/controle/byIdUser/:id",
+      "dest": "src/controle/controle.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/theme",
+      "dest": "src/theme/theme.controller.ts",
+      "methods": ["GET", "POST", "DELETE", "PUT"]
+    },
+    {
+      "src": "/theme/:id",
+      "dest": "src/theme/theme.controller.ts",
+      "methods": ["GET", "PUT", "DELETE"]
+    },
+    {
+      "src": "/theme/byThematique/:thematique",
+      "dest": "src/theme/theme.controller.ts",
+      "methods": ["GET"]
+    },
+    {
+      "src": "/auth",
+      "dest": "src/auth/auth.controller.ts",
+      "methods": ["GET", "POST", "DELETE", "PUT"]
+    },
+    {
+      "src": "/auth/login",
+      "dest": "src/auth/auth.controller.ts",
+      "methods": ["POST"]
+    },
+    {
+      "src": "/auth/refresh",
+      "dest": "src/auth/auth.controller.ts",
+      "methods": ["GET"]
+    }
+  ]
+}
