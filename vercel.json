@@ -1,0 +1,37 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "dist/main.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/user",
+        "dest": "dist/user/user.controller.js",
+        "methods": ["GET", "POST","DELETE","PUT"]
+      },
+      {
+        "src": "/caractere",
+        "dest": "dist/caractere/caractere.controller.js",
+        "methods": ["GET", "POST","DELETE","PUT"]
+      },
+      {
+        "src": "/controle",
+        "dest": "dist/controle/controle.controller.js",
+        "methods": ["GET", "POST","DELETE","PUT"]
+      },
+      {
+        "src": "/theme",
+        "dest": "dist/theme/theme.controller.js",
+        "methods": ["GET", "POST","DELETE","PUT"]
+      },
+      {
+        "src": "/",
+        "dest": "dist/main.js",
+        "methods": ["GET", "POST", "PUT", "DELETE"]  
+      }
+    ]
+  }
+  
