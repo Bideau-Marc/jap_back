@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+    binaryTargets = ["native"] // Ajoutez cette ligne
+
+}
+
+datasource db {
+/// DATABASE_URL: env('DATABASE_URL')
+provider = "sqlite"
+url      = env("DATABASE_URL")
+
+}
+model User {
+  id    Int     @id @default(autoincrement())
+  login String  @unique 
+mdp  String?
+  pseudo String?
+  admin Boolean @default(false)
+  controle Controle[]
+}
+model Controle {
+  id Int @id @default(autoincrement())
+  exercicesReponses String 
+  note Int 
+  date DateTime @default(now()) // Champ de date avec valeur par défaut
+  personne User @relation(fields: [personneId], references: [id])
+  personneId Int
+}
+model Theme {
+  id Int @id @default(autoincrement())
+  thematique String @unique
+  caracteres Caractere[]
+}
+model Caractere {
+  id    Int     @id @default(autoincrement())
+  francais String 
+  japonaisKata String? 
+  japonaisHira String? 
+  kanji String?
+  theme Theme @relation(fields: [themeId], references: [id])
+  themeId Int
+}
+// Utilisez l'option schema pour désactiver le préfixe "main"
+// pour toutes les tables générées
+generator prisma {
+  provider = "prisma-client-js"
+  schema   = "public"
+}

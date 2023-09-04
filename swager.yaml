@@ -1,0 +1,534 @@
+openapi: 3.0.0
+info:
+  title: API JAP
+  description: API site de jap 
+  version: 1.0.0
+
+servers:
+  - url: https://13.38.219.210
+
+paths:
+  /auth/login:
+    post:
+      summary: Se connecter
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Connexion réussie
+        "403":
+          description: Connexion échouée
+
+  /auth/refresh:
+    get:
+      summary: Rafraîchir le token d'authentification
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Token d'authentification rafraîchi
+        "403":
+          description: Token d'authentification non rafraîchi
+
+  /caractere:
+    post:
+      summary: Créer un caractère
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateCaractereDto"
+      responses:
+        "200":
+          description: Caractère créé avec succès
+
+    get:
+      summary: Récupérer tous les caractères
+      responses:
+        "200":
+          description: Liste de tous les caractères
+
+  /caractere/multiple:
+    post:
+      summary: Créer plusieurs caractères
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/CreateCaractereDto"
+      responses:
+        "200":
+          description: Caractères créés avec succès
+
+  /caractere/the/{id}:
+    get:
+      summary: Trouver tous les caractères par thématique
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Liste des caractères par thématique
+
+  /caractere/id/{id}:
+    get:
+      summary: Trouver un caractère par ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Détails du caractère trouvé
+
+  /caractere/fr/{id}:
+    get:
+      summary: Trouver un caractère par français
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Détails du caractère trouvé
+
+  /caractere/kat/{id}:
+    get:
+      summary: Trouver un caractère par katakana
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Détails du caractère trouvé
+
+  /caractere/hir/{id}:
+    get:
+      summary: Trouver un caractère par hiragana
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Détails du caractère trouvé
+
+  /caractere/Kanji/{id}:
+    get:
+      summary: Trouver un caractère par kanji
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Détails du caractère trouvé
+
+  /caractere/category:
+    post:
+      summary: Récupérer tous les caractères d'une catégorie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: int
+      responses:
+        "200":
+          description: Liste de caractères par catégorie
+
+  /caractere/{id}:
+    put:
+      summary: Mettre à jour un caractère par ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCaractereDto"
+      responses:
+        "200":
+          description: Caractère mis à jour avec succès
+
+    delete:
+      summary: Supprimer un caractère par ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Caractère supprimé avec succès
+
+  /controle:
+    post:
+      summary: Create a new controle
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateControleDto"
+      responses:
+        "201":
+          description: Controle created successfully
+
+  /controle/{id}:
+    get:
+      summary: Get a controle by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Controle retrieved successfully
+
+    put:
+      summary: Update a controle by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateControleDto"
+      responses:
+        "200":
+          description: Controle updated successfully
+
+    delete:
+      summary: Delete a controle by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Controle deleted successfully
+
+  /controle/byIdUser/{id}:
+    get:
+      summary: Get controles by user ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Controles retrieved successfully
+  /theme:
+    post:
+      summary: Create a new theme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateThemeDto"
+      responses:
+        "201":
+          description: Theme created successfully
+
+    get:
+      summary: Get all themes
+      responses:
+        "200":
+          description: Themes retrieved successfully
+
+  /theme/byId/{id}:
+    get:
+      summary: Get a theme by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Theme retrieved successfully
+
+  /theme/byThematique/{thematique}:
+    get:
+      summary: Get themes by thematique
+      parameters:
+        - name: thematique
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Themes retrieved successfully
+
+  /theme/{id}:
+    put:
+      summary: Update a theme by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateThemeDto"
+      responses:
+        "200":
+          description: Theme updated successfully
+
+    delete:
+      summary: Delete a theme by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Theme deleted successfully
+
+  /user:
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreateDto'
+      responses:
+        '201':
+          description: User created successfully
+
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: Users retrieved successfully
+
+  /user/{id}:
+    get:
+      summary: Get a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: User retrieved successfully
+
+    put:
+      summary: Update a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserUpdateDto'
+      responses:
+        '200':
+          description: User updated successfully
+
+    delete:
+      summary: Delete a user by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: User deleted successfully
+components:
+  schemas:
+    CreateCaractereDto:
+      type: object
+      properties:
+        francais:
+          type: string
+          description: Texte en français du caractère
+        japonaisKata:
+          type: string
+          description: Caractère japonais en katakana
+        japonaisHira:
+          type: string
+          description: Caractère japonais en hiragana
+        Kanji:
+          type: string
+          description: Caractère Kanji
+        themeId:
+          type: integer
+          description: ID du thème associé au caractère
+      required:
+        - francais
+        - themeId
+    UpdateCaractereDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: uuid
+          readOnly: true
+        francais:
+          type: string
+        japonaisKata:
+          type: string
+        japonaisHira:
+          type: string
+        Kanji:
+          type: string
+        themeId:
+          type: integer
+        theme:
+          type: object
+
+    CreateControleDto:
+      type: object
+      properties:
+        exercicesReponses:
+          type: object
+        note:
+          type: number
+        personneId:
+          type: integer
+    UpdateControleDto:
+      type: object
+      properties:
+        id:
+          type: integer
+        listeExercice:
+          type: string
+        listeReponse:
+          type: string
+        note:
+          type: number
+        personneId:
+          type: integer
+
+    CreateThemeDto:
+      type: object
+      properties:
+        thematique:
+          type: string
+      required:
+        - thematique
+    UpdateThemeDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        thematique:
+          type: string
+      required:
+        - id
+    UserCreateDto:
+      type: object
+      properties:
+        login:
+          type: string
+        mdp:
+          type: string
+        pseudo:
+          type: string
+        admin:
+          type: boolean
+
+    UserUpdateDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int
+          readOnly: true
+        login:
+          type: string
+        password:
+          type: string
+        pseudo:
+          type: string
+        admin:
+          type: boolean
+        controle:
+          type: array
+          items:
+            type: object  # Ici, spécifiez le type d'éléments du tableau
+            properties:
+              exercicesReponses:
+                type: object
+              note:
+                type: number
+              personneId:
+                type: integer
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - BearerAuth: []

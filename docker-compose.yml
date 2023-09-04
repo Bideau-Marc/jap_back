@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+
+  backend:
+    build: ./
+    container_name: Jap_back
+    environment:
+      - PORT=3000
+      - DATABASE_URL=file:./dev.db
+      - SECRETKEY="secret"
+      - EXPIRESIN=60000s
+      - MAX_RESULTS=1000
+    volumes:
+      - ./prisma:/app/prisma  # Créer un volume pour stocker les données de la base de données
+
+    ports:
+      - '3000:3000'
+
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
