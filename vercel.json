@@ -1,7 +1,7 @@
 
 {
   "version": 2,
-  "framework":"other",
+  "framework":"Other",
   "builds": [
     {
       "src": "src/main.ts",
