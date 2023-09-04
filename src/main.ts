@@ -8,13 +8,13 @@ async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  app.use(
-    sessession({ 
-      secret: 'my-secret',
-      resave: false,
-      saveUninitialized: false,
-    })
-  )
+  // app.use(
+  //   sessession({ 
+  //     secret: 'my-secret',
+  //     resave: false,
+  //     saveUninitialized: false,
+  //   })
+  // )
 
   const config = new DocumentBuilder()
     .setTitle('Japonais')
