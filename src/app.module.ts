@@ -33,6 +33,6 @@ import { configuration } from './configuration';
 })
 export class AppModule {
   constructor(){
-    console.log('config', configuration() ) 
+    setTimeout(()=>console.log('config', configuration(),1000 )); 
   }
 }
